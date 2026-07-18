@@ -3,13 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const addTaskBtn = document.getElementById('addTaskBtn');
     const taskList = document.getElementById('taskList');
 
-    // Load tasks from local storage
+  
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-    // Initial render
+ 
     renderTasks();
 
-    // Add task
     addTaskBtn.addEventListener('click', () => {
         addTask(taskInput.value);
     });
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         taskInput.value = '';
     }
 
-    // Explicitly assigning to window so inline onclick handlers work
     window.toggleTask = function(id) {
         tasks = tasks.map(task => {
             if (task.id === id) {
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.deleteTask = function(id, btnElement) {
-        // Find the parent li element
+   
         const li = btnElement.closest('.task-item');
         if (li) {
             li.style.animation = 'slideOut 0.3s forwards';
@@ -59,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderTasks();
             }, 300);
         } else {
-            // Fallback if structure changes
+      
             tasks = tasks.filter(task => task.id !== id);
             saveTasks();
             renderTasks();
@@ -107,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Helper to prevent XSS
+  
     function escapeHTML(str) {
         const div = document.createElement('div');
         div.innerText = str;
